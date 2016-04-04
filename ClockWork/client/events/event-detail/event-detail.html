@@ -1,0 +1,67 @@
+<!--
+    Authors: Cullin Lam, Andry Lora
+    Created on: 2/16/2016
+    file: event-detail.html
+    This file displays the view for event detail
+     issues:
+        -2/16/2016
+            ion nav bar title does not show on ios
+            native require swipe right to go back
+     fixed:
+        -2/18/2016
+        by: Son Nguyen
+        comment: Don't use the meteor directive way in the routes.js. It will work but, it will break
+                 ionic's views and functionality.
+        source: https://github.com/driftyco/ionic-starter-t
+                http://codepen.io/ionic/pen/odq
+
+     -2/24/16 C Lam
+        - Fixed controller references
+        - Added Ng-Hide on cap var
+        - Need to implement attendee list once users added
+
+    -2/27/16 C Lam
+        -utilizes countdown-timer directive
+    -3/5/16
+        -CLam
+            -updated view-title
+    -3/18/16
+        -Clam - added leave call
+        Added inline style to force black text
+-->
+
+<ion-view view-title="Detail">
+    <ion-content class="padding">
+        <div class="card" style="color: #111111">
+            <div>
+            <p>{{EventDetail.event.owner}}</p>
+        </div>
+            <div>
+                <span>{{EventDetail.event.event_type}}</span>
+                <h2>{{EventDetail.event.title}}</h2>
+
+                <h3>{{EventDetail.event.time_expire | date:"short"}}</h3>
+                <countdown-timer></countdown-timer>
+
+                <p>{{EventDetail.event.description}}</p>
+            </div>
+            <div>
+                <h2 ng-hide="EventDetail.hide">{{EventDetail.event.cap - EventDetail.event.fill}} spots remaining!</h2>
+            </div>
+        </div>
+        <button ng-click="EventDetail.attend()" class="button button-medium button-royal" ng-hide="EventDetail.hide_attend">
+            Attend
+        </button>
+        <button ng-click="EventDetail.leave()" class="button button-medium button-royal" ng-hide="EventDetail.hide_leave">
+            Leave
+        </button>
+        <ion-list>
+            <ion-item ng-repeat="user in EventDetail.event.attendees">
+                {{user}}
+            </ion-item>
+        </ion-list>
+        <div>
+            <p>{{EventDetail.event.loc}}</p>
+        </div>
+    </ion-content>
+</ion-view>

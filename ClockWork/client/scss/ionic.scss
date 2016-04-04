@@ -1,0 +1,217 @@
+/*
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #4a87ee !default;
+$calm:                            #43cee6 !default;
+$balanced:                        #66cc33 !default;
+$energized:                       #f0b840 !default;
+$assertive:                       #ef4e3a !default;
+$royal:                           #8a6de9 !default;
+$dark:                            #444 !default;
+*/
+$test-image: "134.png";
+$blue: #EEEEEE;
+$dark: #F44336;
+$orange: #fc5a22;
+
+$side-menu-background-color: #1B2432;
+$side-menu-tab-color: #2E3C54;
+$text: white;
+
+$main-content-text-color: black;
+
+ion-side-menu-content{
+
+  ion-nav-bar{
+    ion-header-bar.bar.bar-dark{
+      border-color: #dddddd;
+    }
+  }
+
+  ion-nav-view{
+    ion-view.pane{
+      background-color: #dddddd;
+
+      ion-content{
+        // This is the background color for each event in the list
+        ion-list{
+          ion-item.item.item-complex.item-right-editable {
+            height: 150px;
+            a.item-content{
+              padding: 0%;
+              height:100%;
+              div.row{
+                padding:0px;
+                height:100%;
+                div.col.col-33{
+                  text-align: center;
+                  background-color: #5D9EA1;
+                  color:white;
+                }
+                div.col.item-text-wrap{
+                  h2{ font-weight: bolder;
+                      padding-left: 3px;
+                      font-size: 30px;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      width: 125px;
+                  }
+                  h3{ padding-left: 3px}
+
+                  div.row{
+                    div.col{
+                      countdown-timer h3{margin-left: 5px; margin-top:3px;}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//Side Navigation
+ion-side-menu{
+
+  ion-header-bar.bar{
+    background-color: $side-menu-tab-color;
+    border-color:$side-menu-background-color;
+    border-bottom-width: 0px;
+    h1{
+      color: $text;
+    }
+  }
+
+  ion-content{
+    background-color: $side-menu-background-color;
+
+    .list .item{
+      background-color: $side-menu-tab-color;
+      border-color:$side-menu-background-color;
+      color: $text;
+    }
+
+    //.list .item:hover{
+    //  background-color: #FF5964;
+    //  //color: #F44336;
+    //  //border-left: thick solid #F44336;
+    //}
+    .list .item:active{
+      background-color: #FF5964;
+    }
+    .list .item:hover{
+      background-color: #FF5964;
+    }
+  }
+}
+
+
+// Double check on this for the drop down.
+ion-modal-view{
+  ion-content{
+    background-color: $blue;
+    form {
+      label.item-input {
+        background-color: $blue;
+
+        //Make all the text in the modal with <div/> tag into white color;
+        div{
+          color:$main-content-text-color;
+        }
+
+        input{
+          color:$main-content-text-color;
+        }
+        input::-webkit-input-placeholder {
+          color: $main-content-text-color;
+        }
+
+        textarea{
+          background-color: $blue;
+          color:$main-content-text-color;
+        }
+        textarea::-webkit-input-placeholder {
+          color: $main-content-text-color;
+        }
+
+        select{
+          background-color: $blue;
+          color:$main-content-text-color;
+        }
+      }
+      label.item-input:hover{
+        background-color:$orange;
+        textarea:hover{
+          background-color:$orange;
+        }
+        select:hover{
+          background-color:$orange;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+@charset "UTF-8";
+
+@import
+  // Ionicons
+"ionicons/ionicons.scss",
+
+  // Variables
+"mixins",
+"variables",
+
+  // Base
+"reset",
+"scaffolding",
+"type",
+
+  // Components
+"action-sheet",
+"backdrop",
+"bar",
+"tabs",
+"menu",
+"modal",
+"popover",
+"popup",
+"loading",
+"items",
+"list",
+"badge",
+"slide-box",
+"slides",
+"refresher",
+"spinner",
+
+  // Forms
+"form",
+"checkbox",
+"toggle",
+"radio",
+"range",
+"select",
+"progress",
+
+  // Buttons
+"button",
+"button-bar",
+
+  // Util
+"grid",
+"util",
+"platform",
+
+  // Animations
+"animations",
+"transitions";
+
