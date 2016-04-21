@@ -16,9 +16,11 @@
 -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+<!-- Jvandemo test-->
 <script src="angularjs-google-maps.js"></script>
 <script src="test.js"></script>
-
+<!-- https://github.com/ubilabs/geocomplete/ Test-->
+<script src="jquery.geocomplete.js"></script>
 <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-dark">
         <h1 class="title">New Event</h1>
@@ -116,6 +118,19 @@
 
             </form>
 
+
+
+<!-- https://github.com/ubilabs/geocomplete/ Test-->
+<input type="text">
+<div class = "map"></div>
+
+<script>
+    $('input').geocomplete({
+        map: ".map"
+    });
+
+
+</script>
 
         </div>
     </ion-content>
