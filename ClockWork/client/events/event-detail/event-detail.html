@@ -28,12 +28,17 @@
     -3/18/16
         -Clam - added leave call
         Added inline style to force black text
+    -4/21/16
+        -Alora
+        -seperated elements into cards
+            -(Owner,Event type),(Time of event,countdown,location,description),
+            (Remaning spots,attending)
 -->
-<ion-view view-title="Detail">
+<ion-view view-title="Detail" style="background-color:#FFAEAE;">
     <ion-content class="padding">
         <div class="card">
             <div class="item item-divider">
-                Owner
+                Host
             </div>
             <div class="item item-text-wrap">
                 {{EventDetail.event.owner}}
@@ -44,6 +49,8 @@
             <div class="item item-text-wrap">
                 {{EventDetail.event.event_type}}
             </div>
+        </div>
+        <div class="card">
             <div class="item item-divider">
                 Time of Event and Attend Countdown
             </div>
@@ -52,30 +59,18 @@
                 <countdown-timer></countdown-timer>
             </div>
             <div class="item item-divider">
+                Location
+            </div>
+            <div class="item item-text-wrap">
+                <p>{{EventDetail.event.loc}}</p>
+            </div>
+            <div class="item item-divider">
                 Description
             </div>
             <div class="item item-text-wrap">
                 <p>{{EventDetail.event.description}}</p>
             </div>
-            <div class="item item-divider">
-                Remaining Spots
-            </div>
-            <div class="item item-text-wrap">
-                <h2 ng-hide="EventDetail.hide">{{EventDetail.event.cap - EventDetail.event.fill}} spots remaining!</h2>
-            </div>
-            <div class="item item-divider">
-                Location
-            </div>
-            <div class="item item-text-wrap">
-            <p>{{EventDetail.event.loc}}</p>
-        
-            </div>
         </div>
-
-
-
-
-
         <button ng-click="EventDetail.attend()" class="button button-medium button-royal" ng-hide="EventDetail.hide_attend">
             Attend
         </button>
@@ -83,6 +78,12 @@
             Leave
         </button>
         <ion-list>
+            <div class="item item-divider">
+                Remaining Spots
+            </div>
+            <div class="item item-text-wrap">
+                <h2 ng-hide="EventDetail.hide">{{EventDetail.event.cap - EventDetail.event.fill}} spots remaining!</h2>
+            </div>
             <ion-item class="item-divider">Attending</ion-item>
             <ion-item ng-controller="gotoProfileCtrl" ng-repeat="user in EventDetail.event.attendees">
                 <div ng-click="goToProfile({{user}})">{{user}}</div>
