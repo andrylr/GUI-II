@@ -29,26 +29,53 @@
         -Clam - added leave call
         Added inline style to force black text
 -->
-
 <ion-view view-title="Detail">
     <ion-content class="padding">
-        <div class="card" style="color: #111111">
-            <div>
-            <p>{{EventDetail.event.owner}}</p>
-        </div>
-            <div>
-                <span>{{EventDetail.event.event_type}}</span>
-                <h2>{{EventDetail.event.title}}</h2>
-
+        <div class="card">
+            <div class="item item-divider">
+                Owner
+            </div>
+            <div class="item item-text-wrap">
+                {{EventDetail.event.owner}}
+            </div>
+            <div class="item item-divider">
+                Event Type
+            </div>
+            <div class="item item-text-wrap">
+                {{EventDetail.event.event_type}}
+            </div>
+            <div class="item item-divider">
+                Time of Event and Attend Countdown
+            </div>
+            <div class="item item-text-wrap">
                 <h3>{{EventDetail.event.time_expire | date:"short"}}</h3>
                 <countdown-timer></countdown-timer>
-
+            </div>
+            <div class="item item-divider">
+                Description
+            </div>
+            <div class="item item-text-wrap">
                 <p>{{EventDetail.event.description}}</p>
             </div>
-            <div>
+            <div class="item item-divider">
+                Remaining Spots
+            </div>
+            <div class="item item-text-wrap">
                 <h2 ng-hide="EventDetail.hide">{{EventDetail.event.cap - EventDetail.event.fill}} spots remaining!</h2>
             </div>
+            <div class="item item-divider">
+                Location
+            </div>
+            <div class="item item-text-wrap">
+            <p>{{EventDetail.event.loc}}</p>
+        
+            </div>
         </div>
+
+
+
+
+
         <button ng-click="EventDetail.attend()" class="button button-medium button-royal" ng-hide="EventDetail.hide_attend">
             Attend
         </button>
@@ -56,12 +83,10 @@
             Leave
         </button>
         <ion-list>
-            <ion-item ng-repeat="user in EventDetail.event.attendees">
-                {{user}}
+            <ion-item class="item-divider">Attending</ion-item>
+            <ion-item ng-controller="gotoProfileCtrl" ng-repeat="user in EventDetail.event.attendees">
+                <div ng-click="goToProfile({{user}})">{{user}}</div>
             </ion-item>
         </ion-list>
-        <div>
-            <p>{{EventDetail.event.loc}}</p>
-        </div>
     </ion-content>
 </ion-view>

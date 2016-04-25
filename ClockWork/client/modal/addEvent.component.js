@@ -21,8 +21,8 @@
  *   -3/14/16 C Lam
  *      -Added Meteor User username to event create record
  */
-
-angular.module('ClockWork').controller('addEventCtrl', function($scope, $reactive) {
+angular
+    .module('ClockWork').controller('addEventCtrl', function($scope, $reactive) {
 
     //uses 'this' instead of '$scope' because of controllerAs.
     $reactive(this).attach($scope);
@@ -33,6 +33,7 @@ angular.module('ClockWork').controller('addEventCtrl', function($scope, $reactiv
     var check_description = false;
     var check_event_type = false;
     var check_capacity = false;
+    var check_loc = false;
 
     //declaring empty eventS
     this.newEvent = {};
@@ -43,7 +44,7 @@ angular.module('ClockWork').controller('addEventCtrl', function($scope, $reactiv
             return Events.find({});
         }
     });
-        $scope.greeting = 'Meow';
+
     //use this variable to store the selected value in the timePicker.
     var expire_time= 0;
 
@@ -54,7 +55,7 @@ angular.module('ClockWork').controller('addEventCtrl', function($scope, $reactiv
         inputEpochTime: 0, //((new Date()).getHours() * 60 * 60),  //Optional
         step: 5,  //Optional
         format: 24,  //Optional
-        titleLabel: '24-hour Format',  //Optional
+        titleLabel: 'Set Event Feed Duration <br> hours : minutes',  //Optional
         setLabel: 'Set',  //Optional
         closeLabel: 'Close',  //Optional
         setButtonType: 'button-positive',  //Optional
@@ -97,10 +98,10 @@ angular.module('ClockWork').controller('addEventCtrl', function($scope, $reactiv
      *       valid - type(bool): True if the whole form is valid on submission. Else false.
      *       form - type(form object): form is a variable that store the "name" of a form.
      *       name, description, event_type, and capacity - type(ng-model object): value of the model in the form.*/
-    this.addEvent = function(valid, form, name, description, event_type, capacity){
+    this.addEvent = function(valid, form, name, description, event_type, capacity, loc){
 
         if(valid === true && check_time === false && typeof(name) != 'undefined' &&
-            typeof(description) != 'undefined' && typeof(event_type) != 'undefined' && typeof(capacity) != 'undefined') {
+            typeof(description) != 'undefined' && typeof(event_type) != 'undefined' && typeof(capacity) != 'undefined' && typeof(loc) != 'undefined') {
 
             ////convert cap to int if not 10+
             if (this.newEvent['cap'].search('\\++') == -1) {
@@ -114,9 +115,9 @@ angular.module('ClockWork').controller('addEventCtrl', function($scope, $reactiv
             this.newEvent['fill'] = 1;
             this.newEvent['owner'] = Meteor.user().username;
             // add empty array for attendees
-            this.newEvent['attendees'] = [];
+            this.newEvent['attendees'] = [Meteor.user().username];
             // add empty object for loc
-            this.newEvent['loc'] = {};
+            //this.newEvent['loc'] = {};
             // add expired field
             this.newEvent['expired'] = false;
             //add event type
@@ -138,6 +139,7 @@ angular.module('ClockWork').controller('addEventCtrl', function($scope, $reactiv
             check_description = false;
             check_event_type = false;
             check_capacity = false;
+            check_loc = false;
 
             $scope.modal.hide();
 
@@ -153,6 +155,7 @@ angular.module('ClockWork').controller('addEventCtrl', function($scope, $reactiv
             check_description = true;
             check_event_type = true;
             check_capacity = true;
+            check_loc = true;
             $scope.modal.show();
         }
 
@@ -195,6 +198,14 @@ angular.module('ClockWork').controller('addEventCtrl', function($scope, $reactiv
         }
     }
 
+    this.checkLocation = function(){
+        if(check_loc == true){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     // Check this website out for the idea http://codepen.io/sevilayha/pen/HnxkJ
     // Displace ng-show to validate if timePicker have not been selected.
     this.checkTime = function(){
@@ -209,7 +220,6 @@ angular.module('ClockWork').controller('addEventCtrl', function($scope, $reactiv
     /* End of Custom Validation*/
 
     });
-
 
 
 

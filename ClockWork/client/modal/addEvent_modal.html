@@ -14,20 +14,12 @@
      3/14/16 C LAM
         - Added more options
 -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
-<!-- Jvandemo test-->
-<script src="angularjs-google-maps.js"></script>
-<script src="test.js"></script>
-<!-- https://github.com/ubilabs/geocomplete/ Test-->
-<script src="jquery.geocomplete.js"></script>
 <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-dark">
         <h1 class="title">New Event</h1>
         <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
     </ion-header-bar>
     <ion-content class="padding">
-
         <div class="list" ng-controller="addEventCtrl as addEvent">
             <form class="list" name="eventForm" novalidate>
 
@@ -40,6 +32,20 @@
                     <div ng-show="eventForm.eventName.$error.required">Event name require.</div>
                 </div>
 
+
+<!--<label class="item item-input text">
+                    <!-- use ng-change="" to edit loc
+                    <div ng-controller="MainCtrl">
+                        <div ng-controller="placesAutocompleteCtrl">
+                    <input type="text" gm-places-autocomplete="autocompleteOptions" placeholder="Address" ng-model="autocompleteModel"/>
+                         </div>
+                    </div>
+                </label>-->
+
+<label class="item item-input text">
+                <textarea type="text" placeholder="Location" name="Location" ng-model="addEvent.newEvent.loc" required></textarea>
+                </label>
+
                 <label class="item item-input text"
                        ng-class="{'has-error': addEvent.checkName() || eventForm.$submitted || eventForm.eventDetail.$touched,
                                   'valid-lr': eventForm.eventDetail.$valid}">
@@ -49,14 +55,8 @@
                     <div ng-show="eventForm.eventDetail.$error.required">Event description require.</div>
                 </div>
 
-                <label class="item item-input text">
-                    <!-- use ng-change="" to edit loc-->
-                    <div ng-controller="MainCtrl">
-                        <div ng-controller="placesAutocompleteCtrl">
-                    <input type="text" gm-places-autocomplete="autocompleteOptions" placeholder="Address" ng-model="autocompleteModel"/>
-                         </div>
-                    </div>
-                </label>
+
+
                 <label class="item item-input item-select">
                     <div class="input-label">
                         Pick Event Type:
@@ -105,7 +105,7 @@
 
                 <ionic-timepicker input-obj="addEvent.timePickerObject" name="eventTime" required>
                     <button type="button" class="button button-dark button-block">
-                        <standard-time-meridian etime='addEvent.timePickerObject.inputEpochTime'>Pick Time</standard-time-meridian>
+                        <standard-time-meridian etime='addEvent.timePickerObject.inputEpochTime'>Set Countdown Duration</standard-time-meridian>
                     </button>
                 </ionic-timepicker>
                 <span style="color:red" ng-show="addEvent.checkTime()">Please select time</span>
@@ -114,24 +114,10 @@
                                                                                                            eventForm, addEvent.newEvent.title,
                                                                                                            addEvent.newEvent.description,
                                                                                                            addEvent.newEvent.event_type,
-                                                                                                addEvent.newEvent.cap );">Confirm Event and Post</button>
+                                                                                                           addEvent.newEvent.loc,
+                                                                                                           addEvent.newEvent.cap );">Confirm Event and Post</button>
 
             </form>
-
-
-
-<!-- https://github.com/ubilabs/geocomplete/ Test-->
-<input type="text">
-<div class = "map"></div>
-
-<script>
-    $('input').geocomplete({
-        map: ".map"
-    });
-
-
-</script>
-
         </div>
     </ion-content>
 </ion-modal-view>
